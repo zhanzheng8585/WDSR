@@ -42,8 +42,8 @@ def main():
     # model = ColorNet()
     args = get_args()
     model = MODEL(args)
-    state_dict = torch.load("./checkpoint/checkpoint6/model_epoch133_step1.pth")
-    new_state_dict = OrderedDict()
+    # state_dict = torch.load("./checkpoint/checkpoint6/model_epoch133_step1.pth")
+    # new_state_dict = OrderedDict()
 
     # for k, v in state_dict.items():
     #     k = k.replace('module.', '')
@@ -51,7 +51,8 @@ def main():
 
     # model = torch.nn.DataParallel(model)
     # model.load_state_dict(new_state_dict)
-    model.load_state_dict(state_dict)
+    checkpoint = torch.load("./checkpoint/checkpoint6/model_epoch133_step1.pth")
+    model.load_state_dict(checkpoint["model"].state_dict())
 
     # print(model)
     input_shape = (1, 256, 256)
