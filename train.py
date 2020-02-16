@@ -30,7 +30,7 @@ def train(data_loader, optimizer, model, criterion, epoch, args):
 
     print("Epoch={}, lr={}".format(epoch, optimizer.param_groups[0]["lr"]))
     model.train()
-
+    save_checkpoint(model, epoch, 1)
     step = 0
     for iteration, batch in enumerate(data_loader, 1):
         step += 1
