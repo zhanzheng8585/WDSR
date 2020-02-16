@@ -54,11 +54,12 @@ def main():
     checkpoint = torch.load("./checkpoint/checkpoint6/model_epoch133_step1.pth")
     model.load_state_dict(checkpoint["model"].state_dict())
 
-    print(model)
-    torch.nn.utils.remove_weight_norm(model.head)
-    torch.nn.utils.remove_weight_norm(model.body)
-    torch.nn.utils.remove_weight_norm(model.tail)
-    torch.nn.utils.remove_weight_norm(model.skip)
+    # print(model)
+    model.eval()
+    # torch.nn.utils.remove_weight_norm(model.head)
+    # torch.nn.utils.remove_weight_norm(model.body)
+    # torch.nn.utils.remove_weight_norm(model.tail)
+    # torch.nn.utils.remove_weight_norm(model.skip)
     # print(model)
     input_shape = (3, 256, 256)
     model_onnx_path = "./wdsr_b.onnx"
