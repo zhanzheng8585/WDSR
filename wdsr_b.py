@@ -13,7 +13,7 @@ class Block(nn.Module):
         # body.append(
         #     torch.nn.utils.weight_norm(nn.Conv2d(n_feats, n_feats*expand, 1, padding=1//2)))
         body.append(
-            nn.Conv2d(n_feats, n_feats*expand, 1, padding=1//2))
+            torch.nn.utils.weight_norm(nn.Conv2d(n_feats, n_feats*expand, 1, padding=1//2)))
         body.append(act)
         body.append(
             torch.nn.utils.weight_norm(nn.Conv2d(n_feats*expand, int(n_feats*linear), 1, padding=1//2)))
