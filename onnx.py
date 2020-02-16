@@ -36,12 +36,12 @@ from args import *
 
 def main():
 
-    # use_gpu = torch.cuda.is_available()
+    use_gpu = torch.cuda.is_available()
     # Create model  
     # models.resnet18(num_classes=365)
     # model = ColorNet()
     args = get_args()
-    model = MODEL(args)(device='cuda:0')
+    model = MODEL(args)
     # state_dict = torch.load("./checkpoint/checkpoint6/model_epoch133_step1.pth")
     # new_state_dict = OrderedDict()
 
@@ -56,7 +56,7 @@ def main():
 
     # print(model)
     input_shape = (1, 256, 256)
-    model_onnx_path = "wdsr_b.onnx"
+    model_onnx_path = "./wdsr_b.onnx"
     model.train(False)
 
     # Export the model to an ONNX file
