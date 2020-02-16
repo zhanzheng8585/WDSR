@@ -36,7 +36,7 @@ from args import *
 
 def main():
 
-    use_gpu = torch.cuda.is_available()
+    # use_gpu = torch.cuda.is_available()
     # Create model  
     # models.resnet18(num_classes=365)
     # model = ColorNet()
