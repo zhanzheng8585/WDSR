@@ -84,7 +84,7 @@ def main():
     torch.nn.utils.remove_weight_norm(model.tail[0])
     torch.nn.utils.remove_weight_norm(model.skip[0])
     # print(model)
-    input_shape = (3, 256, 256)
+    input_shape = (3, 128, 128)
     model_onnx_path = "./wdsr_b.onnx"
     model.train(False)
     model.eval()
