@@ -40,6 +40,7 @@ def main():
     # Create model  
     # models.resnet18(num_classes=365)
     # model = ColorNet()
+    args = get_args()
     model = MODEL(args)
     state_dict = torch.load("./checkpoint/checkpoint6/model_epoch133_step1.pth")
     new_state_dict = OrderedDict()
