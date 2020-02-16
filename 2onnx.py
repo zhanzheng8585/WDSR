@@ -62,7 +62,7 @@ def main():
     # print(model)
     input_shape = (3, 256, 256)
     model_onnx_path = "./wdsr_b.onnx"
-    model.train(False)
+    # model.train(False)
     model.eval()
     
     # Export the model to an ONNX file
