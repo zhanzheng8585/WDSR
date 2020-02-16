@@ -66,10 +66,10 @@ def test(model_path, args, hr_path='./DIV2K/DIV2K_valid_HR', lr_path='./DIV2K/DI
 
     PSNR = []
     for i in range(801, 901):
-        #hr_img_path = hr_path + '/0{}.png'.format(i)
+        # hr_img_path = hr_path + '/{}.png'.format(i)
         lr_img_path = lr_path + '/{}.png'.format(i)
         lr = io.imread(lr_img_path).astype(np.float32)
-  #      hr = io.imread(hr_img_path).astype(np.float32)
+        # hr = io.imread(hr_img_path).astype(np.float32)
         # Random crop image
         m = random.randint(0, lr.shape[0] - 352)
         n = random.randint(0, lr.shape[1] - 352)
@@ -101,7 +101,7 @@ if __name__ == '__main__':
     args = get_args()
     model_path = './checkpoint/checkpoint6/model_epoch133_step1.pth'
  #   PSNR = test(model_path, args, hr_path='./hr', lr_path='./lr')
-    LR2HR(lr_path='./lr/801.png', hr_path='./hr', model_path= model_path, args = args)
+    LR2HR(lr_path='./lr/802.png', hr_path='./hr', model_path= model_path, args = args)
  #   PSNR = np.array(PSNR)
  #   print(PSNR.mean())
 
