@@ -131,5 +131,5 @@ def check():
     print("Exported model has been tested with ONNXRuntime, and the result looks good!")
 
 if __name__ == '__main__':
-    # main()
-    check()
+    main()
+    # check()
