@@ -55,7 +55,7 @@ def main():
     model.load_state_dict(checkpoint["model"].state_dict())
 
     # print(model)
-    input_shape = (1, 256, 256)
+    input_shape = (3, 256, 256)
     model_onnx_path = "./wdsr_b.onnx"
     model.train(False)
 

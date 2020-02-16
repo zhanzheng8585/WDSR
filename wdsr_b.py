@@ -4,19 +4,21 @@ import torch.nn as nn
 
 
 class Block(nn.Module):
-    def __init__(self, n_feats, kernel_size, wn, act=nn.ReLU(True), res_scale=1):
+    def __init__(self, n_feats, kernel_size, act=nn.ReLU(True), res_scale=1):
         super(Block, self).__init__()
         self.res_scale = res_scale
         body = []
         expand = 6
         linear = 0.8
+        # body.append(
+        #     torch.nn.utils.weight_norm(nn.Conv2d(n_feats, n_feats*expand, 1, padding=1//2)))
         body.append(
-            wn(nn.Conv2d(n_feats, n_feats*expand, 1, padding=1//2)))
+            torch.nn.utils.weight_norm(nn.Conv2d(n_feats, n_feats*expand, 1, padding=1//2)))
         body.append(act)
         body.append(
-            wn(nn.Conv2d(n_feats*expand, int(n_feats*linear), 1, padding=1//2)))
+            torch.nn.utils.weight_norm(nn.Conv2d(n_feats*expand, int(n_feats*linear), 1, padding=1//2)))
         body.append(
-            wn(nn.Conv2d(int(n_feats*linear), n_feats, kernel_size, padding=kernel_size//2)))
+            torch.nn.utils.weight_norm(nn.Conv2d(int(n_feats*linear), n_feats, kernel_size, padding=kernel_size//2)))
 
         self.body = nn.Sequential(*body)
 
@@ -37,7 +39,7 @@ class MODEL(nn.Module):
         kernel_size = 3
         act = nn.ReLU(True)
         # wn = lambda x: x
-        wn = lambda x: torch.nn.utils.weight_norm(x)
+        # wn = lambda x: torch.nn.utils.weight_norm(x)
 
 #       Batch's Size: batch_size x channel x H x W
         self.rgb_mean = torch.autograd.Variable(
@@ -46,24 +48,24 @@ class MODEL(nn.Module):
         # define head module
         head = []
         head.append(
-            wn(nn.Conv2d(args.n_colors, n_feats, 3, padding=3//2)))
+            torch.nn.utils.weight_norm(nn.Conv2d(args.n_colors, n_feats, 3, padding=3//2)))
 
         # define body module
         body = []
         for i in range(n_resblocks):
             body.append(
-                Block(n_feats, kernel_size, act=act, res_scale=args.res_scale, wn=wn))
+                Block(n_feats, kernel_size, act=act, res_scale=args.res_scale))
 
         # define tail module
         tail = []
         out_feats = scale*scale*args.n_colors
         tail.append(
-            wn(nn.Conv2d(n_feats, out_feats, 3, padding=3//2)))
+            torch.nn.utils.weight_norm(nn.Conv2d(n_feats, out_feats, 3, padding=3//2)))
         tail.append(nn.PixelShuffle(scale))
 
         skip = []
         skip.append(
-            wn(nn.Conv2d(args.n_colors, out_feats, 5, padding=5//2))
+            torch.nn.utils.weight_norm(nn.Conv2d(args.n_colors, out_feats, 5, padding=5//2))
         )
         skip.append(nn.PixelShuffle(scale))
 
