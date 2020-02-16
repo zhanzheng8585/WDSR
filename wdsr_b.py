@@ -14,14 +14,14 @@ class Block(nn.Module):
         linear = 0.8
         body.append(
             wn(nn.Conv2d(n_feats, n_feats*expand, 1, padding=1//2)))
-        remove_weight_norm(wn)
+        torch.nn.utils.remove_weight_norm(wn)
         body.append(act)
         body.append(
             wn(nn.Conv2d(n_feats*expand, int(n_feats*linear), 1, padding=1//2)))
-        remove_weight_norm(wn)
+        torch.nn.utils.remove_weight_norm(wn)
         body.append(
             wn(nn.Conv2d(int(n_feats*linear), n_feats, kernel_size, padding=kernel_size//2)))
-        remove_weight_norm(wn)
+        torch.nn.utils.remove_weight_norm(wn)
         self.body = nn.Sequential(*body)
 
     def forward(self, x):
@@ -49,7 +49,7 @@ class MODEL(nn.Module):
         head = []
         head.append(
             wn(nn.Conv2d(args.n_colors, n_feats, 3, padding=3//2)))
-        remove_weight_norm(wn)
+        torch.nn.utils.remove_weight_norm(wn)
         # define body module
         body = []
         for i in range(n_resblocks):
@@ -61,14 +61,14 @@ class MODEL(nn.Module):
         out_feats = scale*scale*args.n_colors
         tail.append(
             wn(nn.Conv2d(n_feats, out_feats, 3, padding=3//2)))
-        remove_weight_norm(wn)
+        torch.nn.utils.remove_weight_norm(wn)
         tail.append(nn.PixelShuffle(scale))
 
         skip = []
         skip.append(
             wn(nn.Conv2d(args.n_colors, out_feats, 5, padding=5//2))
         )
-        remove_weight_norm(wn)
+        torch.nn.utils.remove_weight_norm(wn)
         skip.append(nn.PixelShuffle(scale))
 
         # make object members
