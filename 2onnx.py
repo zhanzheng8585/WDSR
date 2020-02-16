@@ -55,7 +55,6 @@ def main():
     model.load_state_dict(checkpoint["model"].state_dict())
 
     # print(model)
-    model.eval()
     # torch.nn.utils.remove_weight_norm(model.head)
     # torch.nn.utils.remove_weight_norm(model.body)
     # torch.nn.utils.remove_weight_norm(model.tail)
@@ -64,7 +63,8 @@ def main():
     input_shape = (3, 256, 256)
     model_onnx_path = "./wdsr_b.onnx"
     model.train(False)
-
+    model.eval()
+    
     # Export the model to an ONNX file
     dummy_input = Variable(torch.randn(1, *input_shape))
     output = torch_onnx.export(model, 
