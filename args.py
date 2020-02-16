@@ -39,9 +39,11 @@ def get_args():
     parser.add_argument("--cuda", action="store_true", default=False,
                         help="python py --cuda ==> True // python py ==> False")
 
-    parser.add_argument("--resume", default='./checkpoint/model_epoch23_step1.pth', type=str,
+    parser.add_argument("--resume-path", default='./checkpoint/model_epoch23_step1.pth', type=str,
                         help="path to latest checkpoint (default: none)")
 
+    parser.add_argument("--resume", action="store_true", default=False,
+                        help="path to latest checkpoint (default: none)")
 #   args for the Optimizer
     parser.add_argument('--lr', type=float, default=1e-3,
                         help='Learning rate')
