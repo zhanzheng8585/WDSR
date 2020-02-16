@@ -34,7 +34,7 @@ class MODEL(nn.Module):
         super(MODEL, self).__init__()
         # hyper-params
         self.args = args
-        scale = args.scale[0]
+        scale = 2
         n_resblocks = args.n_resblocks
         n_feats = args.n_feats
         kernel_size = 3
@@ -78,6 +78,7 @@ class MODEL(nn.Module):
         self.skip = nn.Sequential(*skip)
 
     def forward(self, x):
+        # copy variable to the display memory of GPU
         x = (x - self.rgb_mean*255)/127.5
         s = self.skip(x)
         x = self.head(x)
