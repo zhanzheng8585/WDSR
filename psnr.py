@@ -58,6 +58,7 @@ def LR2HR(lr_path, hr_path, model_path, args):
 
 def test(model_path, args, hr_path='./DIV2K/DIV2K_valid_HR', lr_path='./DIV2K/DIV2K_valid_LR_bicubic/X2', ):
     model = MODEL(args).cuda()
+    print(model)
     version = 6
     print('===> Load model')
     checkpoint = torch.load(model_path)
@@ -98,7 +99,7 @@ def test(model_path, args, hr_path='./DIV2K/DIV2K_valid_HR', lr_path='./DIV2K/DI
 
 if __name__ == '__main__':
     args = get_args()
-    model_path = './checkpoint6/model_epoch133_step1.pth'
+    model_path = './checkpoint/checkpoint6/model_epoch133_step1.pth'
     PSNR = test(model_path, args, hr_path='./DIV2K/DIV2K_valid_HR', lr_path='./DIV2K/DIV2K_valid_LR_bicubic/X2')
     
     PSNR = np.array(PSNR)
