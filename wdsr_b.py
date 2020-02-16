@@ -72,11 +72,11 @@ class MODEL(nn.Module):
 
     def forward(self, x):
         # copy variable to the display memory of GPU
-        x = (x - self.rgb_mean*255)/127.5
+        # x = (x - self.rgb_mean*255)/127.5
         s = self.skip(x)
         x = self.head(x)
         x = self.body(x)
         x = self.tail(x)
         x += s
-        x = x*127.5 + self.rgb_mean*255
+        # x = x*127.5 + self.rgb_mean*255
         return x
