@@ -110,7 +110,7 @@ def check():
 
     ort_session = onnxruntime.InferenceSession("wdsr_b.onnx")
 
-    x = torch.randn(1, 3, 256, 256, requires_grad=True)
+    x = torch.randn(1, 3, 128, 128, requires_grad=True)
     torch_out = model(x)
     # # Load the ONNX model
     # model = onnx.load("wdsr_b.onnx")
