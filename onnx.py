@@ -45,12 +45,13 @@ def main():
     state_dict = torch.load("./checkpoint/checkpoint6/model_epoch133_step1.pth")
     new_state_dict = OrderedDict()
 
-    for k, v in state_dict.items():
-        k = k.replace('module.', '')
-        new_state_dict[k] = v
+    # for k, v in state_dict.items():
+    #     k = k.replace('module.', '')
+    #     new_state_dict[k] = v
 
     # model = torch.nn.DataParallel(model)
-    model.load_state_dict(new_state_dict)
+    # model.load_state_dict(new_state_dict)
+    model.load_state_dict(state_dict)
 
     # print(model)
     input_shape = (1, 256, 256)
