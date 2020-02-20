@@ -101,7 +101,7 @@ if __name__ == '__main__':
     args = get_args()
     model_path = './checkpoint/checkpoint6/model_epoch133_step1.pth'
  #   PSNR = test(model_path, args, hr_path='./hr', lr_path='./lr')
-    LR2HR(lr_path='./lr/003.png', hr_path='./hr', model_path= model_path, args = args)
+    LR2HR(lr_path='./lr/001.png', hr_path='./hr', model_path= model_path, args = args)
  #   PSNR = np.array(PSNR)
  #   print(PSNR.mean())
 
